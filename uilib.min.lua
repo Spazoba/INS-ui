@@ -783,15 +783,7 @@ end
 
 
 local function DrawBar(x1, y1, x2, y2, thickness, color, z, transparency)
-  local Dx, Dy = x2 - x1, y2 - y1
-  local Length = math.sqrt(Dx * Dx + Dy * Dy)
-
-  if Length < 0.001 then return end
-
-  local Px, Py = -Dy / Length * thickness / 2, Dx / Length * thickness / 2
-
-  DrawTri(x1 + Px, y1 + Py, x1 - Px, y1 - Py, x2 - Px, y2 - Py, color, z, transparency)
-  DrawTri(x1 + Px, y1 + Py, x2 - Px, y2 - Py, x2 + Px, y2 + Py, color, z, transparency)
+    DrawLine(x1, y1, x2, y2, color, z, thickness, transparency)
 end
 
 
