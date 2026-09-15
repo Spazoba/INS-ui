@@ -657,20 +657,36 @@ end
 
 
 local function Take(kind)
-  local Index = Used[kind] + 1
-  Used[kind] = Index
+    local Index = Used[kind] + 1
+    Used[kind] = Index
 
-  local Object, Last = Pool[kind][Index], Cache[kind][Index]
+    local Object, Last = Pool[kind][Index], Cache[kind][Index]
 
-  if not Object then
-    Object, Last = Drawing.new(kind), {}
-    Pool[kind][Index], Cache[kind][Index] = Object, Last
-  end
+    if not Object then
+        Object, Last = Drawing.new(kind), {}
+        Pool[kind][Index], Cache[kind][Index] = Object, Last
+    end
 
-  if Index > Made[kind] then Made[kind] = Index end
-  if not Last.Shown then Last.Shown = true; Object.Visible = true end
+    print(
+        "[INS DEBUG]",
+        "kind =", kind,
+        "index =", Index,
+        "Object type =", type(Object),
+        "Object typeof =", typeof(Object),
+        "Last type =", type(Last),
+        "Last typeof =", typeof(Last)
+    )
 
-  return Object, Last
+    if Index > Made[kind] then
+        Made[kind] = Index
+    end
+
+    if not Last.Shown then
+        Last.Shown = true
+        Object.Visible = true
+    end
+
+    return Object, Last
 end
 
 
