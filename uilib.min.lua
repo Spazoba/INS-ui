@@ -6900,7 +6900,9 @@ do
 
     State.InputSent = ToGame
 
-    setrobloxinput(ToGame)
+    if type(setrobloxinput) == "function" then
+        pcall(setrobloxinput, ToGame)
+    end
   end
 end
 
