@@ -1282,15 +1282,37 @@ local DrawMenuBars
 local BarTint = Color3.fromRGB(36, 38, 50)
 
 
-local function ReadInput()
-  local WasDown, WasRight = Input.Down, Input.RightDown
+local function SafeMouse1Pressed()
+    if type(ismouse1pressed) == "function" then
+        local ok, result = pcall(ismouse1pressed)
+        if ok then
+            return result == true
+        end
+    end
 
-  Input.X, Input.Y = Mouse.X, Mouse.Y
-  Input.Down = ismouse1pressed()
-  Input.RightDown = ismouse2pressed()
-  Input.Click = Input.Down and not WasDown
-  Input.Right = Input.RightDown and not WasRight
-  Input.Up = WasDown and not Input.Down
+    return false
+end
+
+local function SafeMouse2Pressed()
+    if type(ismouse2pressed) == "function" then
+        local ok, result = pcall(ismouse2pressed)
+        if ok then
+            return result == true
+        end
+    end
+
+    return false
+end
+
+local function ReadInput()
+    local WasDown, WasRight = Input.Down, Input.RightDown
+
+    Input.X, Input.Y = Mouse.X, Mouse.Y
+    Input.Down = SafeMouse1Pressed()
+    Input.RightDown = SafeMouse2Pressed()
+    Input.Click = Input.Down and not WasDown
+    Input.Right = Input.RightDown and not WasRight
+    Input.Up = WasDown and not Input.Down
 end
 
 
