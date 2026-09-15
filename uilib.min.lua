@@ -774,7 +774,6 @@ local function DrawTri(ax, ay, bx, by, cx, cy, color, z, transparency)
   if Last.CX ~= cx or Last.CY ~= cy then Last.CX, Last.CY = cx, cy; Object.PointC = Vector2.new(cx, cy) end
   if Last.Color ~= color then Last.Color = color; Object.Color = color end
   if not Last.Filled then Last.Filled = true; Object.Filled = true end
-  if Last.Thickness ~= 1 then Last.Thickness = 1; Object.Thickness = 1 end
   if Last.Depth ~= Depth then Last.Depth = Depth; Object.ZIndex = Depth end
 
   local Shade = transparency * FrameFade
