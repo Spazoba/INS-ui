@@ -4455,7 +4455,7 @@ function InsUi:CreateWindow(config)
   State.Y = config.position and config.position.Y or math.floor(Camera.ViewportSize.Y / 2 - State.H / 2)
 
   ApplyOptions(config)
-  task.spawn(function() State.Avatar = FetchAvatar() end)
+  State.avatar = nil
 
   State.Open = config.startOpen ~= false
 
